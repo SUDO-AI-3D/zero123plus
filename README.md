@@ -1,15 +1,3 @@
----
-title: Zero123++ Demo
-emoji: 🌒
-colorFrom: red
-colorTo: purple
-sdk: streamlit
-sdk_version: 1.19.0
-app_file: app.py
-pinned: false
-license: mit
----
-
 # Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model
 
 ![Teaser](resources/teaser-low.jpg)
