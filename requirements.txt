@@ -1,0 +1,6 @@
+torch
+torchvision
+numpy
+diffusers==0.20.2
+transformers==4.29.2
+altair<5
