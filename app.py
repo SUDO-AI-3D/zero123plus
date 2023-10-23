@@ -208,21 +208,20 @@ torch.set_grad_enabled(False)
 st.title("Zero123++ Demo")
 # st.caption("For faster inference without waiting in queue, you may clone the space and run it yourself.")
 prog = st.progress(0.0, "Idle")
-with st.form("imgform"):
-    pic = st.file_uploader("Upload an Image", key='imageinput', type=['png', 'jpg', 'webp'])
-    left, right = st.columns(2)
-    with left:
-        rem_input_bg = st.checkbox("Remove Input Background")
-    with right:
-        rem_output_bg = st.checkbox("Remove Output Background")
-    num_inference_steps = st.slider("Number of Inference Steps", 15, 100, 75)
-    st.caption("Diffusion Steps. For general real or synthetic objects, around 28 is enough. For objects with delicate details such as faces (either realistic or illustration), you may need 75 or more steps.")
-    cfg_scale = st.slider("Classifier Free Guidance Scale", 1.0, 10.0, 4.0)
-    seed = st.text_input("Seed", "42")
-    submit = False
-    if st.form_submit_button("Submit"):
-        submit = True
-    results_container = st.container()
+pic = st.file_uploader("Upload an Image", key='imageinput', type=['png', 'jpg', 'webp'])
+left, right = st.columns(2)
+with left:
+    rem_input_bg = st.checkbox("Remove Input Background")
+with right:
+    rem_output_bg = st.checkbox("Remove Output Background")
+num_inference_steps = st.slider("Number of Inference Steps", 15, 100, 75)
+st.caption("Diffusion Steps. For general real or synthetic objects, around 28 is enough. For objects with delicate details such as faces (either realistic or illustration), you may need 75 or more steps.")
+cfg_scale = st.slider("Classifier Free Guidance Scale", 1.0, 10.0, 4.0)
+seed = st.text_input("Seed", "42")
+submit = False
+if st.button("Submit"):
+    submit = True
+results_container = st.container()
 sample_got = image_examples(iret, 4, 'rimageinput')
 if sample_got:
     pic = sample_got
