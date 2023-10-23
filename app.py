@@ -5,6 +5,20 @@ from PIL import Image
 import streamlit as st
 
 
+def expand2square(pil_img, background_color):
+    width, height = pil_img.size
+    if width == height:
+        return pil_img
+    elif width > height:
+        result = Image.new(pil_img.mode, (width, width), background_color)
+        result.paste(pil_img, (0, (width - height) // 2))
+        return result
+    else:
+        result = Image.new(pil_img.mode, (height, height), background_color)
+        result.paste(pil_img, ((height - width) // 2, 0))
+        return result
+
+
 @st.cache_data
 def check_dependencies():
     reqs = []
@@ -64,17 +78,44 @@ st.title("Zero123++ Demo")
 prog = st.progress(0.0, "Idle")
 with st.form("imgform"):
     pic = st.file_uploader("Upload an Image", key='imageinput')
+    left, right = st.columns(2)
+    with left:
+        rem_input_bg = st.checkbox("Remove Input Background")
+    with right:
+        rem_output_bg = st.checkbox("Remove Output Background")
+    num_inference_steps = st.slider("Number of Inference Steps", 15, 100, 28)
+    st.caption("Diffusion Steps. For general real or synthetic objects, around 28 is enough. For objects with delicate details such as faces (either realistic or illustration), you may need 75 or more steps.")
+    seed = st.text_input("Seed", "1337")
     if st.form_submit_button("Run!"):
+        seed = int(seed)
+        torch.manual_seed(seed)
         img = Image.open(pic)
-        st.image(img)
+        left, right = st.columns(2)
+        with left:
+            st.image(img)
+            st.caption("Input Image")
+            img = expand2square(img, (127, 127, 127, 0))
+        if rem_input_bg:
+            with right:
+                img = rembg.remove(img, bgcolor=[127, 127, 127, 255])
+                st.image(img)
+                st.caption("Input (Background Removed)")
         prog.progress(0.1, "Preparing Inputs")
         pipeline.set_progress_bar_config(disable=True)
         result = pipeline(
             img,
-            num_inference_steps=75,
-            callback=lambda i, t, latents: prog.progress(0.1 + 0.8 * i / 75, "Diffusion Step %d" % i)
+            num_inference_steps=num_inference_steps,
+            generator=torch.Generator(pipeline.device).manual_seed(seed),
+            callback=lambda i, t, latents: prog.progress(0.1 + 0.8 * i / num_inference_steps, "Diffusion Step %d" % i)
         ).images[0]
         prog.progress(0.9, "Post Processing")
-        result = rembg.remove(result)
-        st.image(result)
+        left, right = st.columns(2)
+        with left:
+            st.image(result)
+            st.caption("Result")
+        if rem_output_bg:
+            result = rembg.remove(result)
+            with right:
+                st.image(result)
+                st.caption("Result (Background Removed)")
         prog.progress(1.0, "Idle")
