@@ -6,7 +6,11 @@ import rembg
 import urllib.request
 from PIL import Image
 import streamlit as st
+import huggingface_hub
 
+
+if 'HF_TOKEN' in os.environ:
+    huggingface_hub.login(os.environ['HF_TOKEN'])
 
 img_example_counter = 0
 iret_base = 'resources/examples'
