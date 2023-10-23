@@ -2,7 +2,7 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Paper](#) [Demo](#)
+[Technical Report](#) [Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo)
 
 ## Get Started
 
@@ -99,5 +99,15 @@ The models are available at [https://huggingface.co/sudo-ai](https://huggingface
 + `sudo-ai/controlnet-zp11-depth-v1` depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
 
 The source code for diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
+
+## Running Demo Locally
+
+You will need to install extra dependencies:
+```
+pip install streamlit
+pip install -r requirements.txt
+```
+
+Then run `streamlit run app.py`.
 
 ## Citation

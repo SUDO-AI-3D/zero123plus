@@ -2,6 +2,8 @@ torch
 torchvision
 numpy
 rembg
+opencv-contrib-python
 diffusers==0.20.2
 transformers==4.29.2
 altair<5
+git+https://github.com/facebookresearch/segment-anything.git
