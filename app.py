@@ -30,6 +30,7 @@ class SAMAPI:
             if sam_checkpoint is None:
                 sam_checkpoint = "tmp/sam_vit_h_4b8939.pth"
             if not os.path.exists(sam_checkpoint):
+                os.makedirs('tmp', exist_ok=True)
                 urllib.request.urlretrieve(
                     "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth",
                     sam_checkpoint
