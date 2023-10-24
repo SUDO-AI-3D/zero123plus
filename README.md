@@ -2,7 +2,7 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Technical Report](#) [Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space)
+[Report](https://arxiv.org/abs/2310.15110) [Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space)
 
 ## Get Started
 
@@ -111,3 +111,15 @@ pip install -r requirements.txt
 Then run `streamlit run app.py`.
 
 ## Citation
+
+If you found Zero123++ helpful, please cite our report:
+```bibtex
+@misc{shi2023zero123,
+      title={Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model}, 
+      author={Ruoxi Shi and Hansheng Chen and Zhuoyang Zhang and Minghua Liu and Chao Xu and Xinyue Wei and Linghao Chen and Chong Zeng and Hao Su},
+      year={2023},
+      eprint={2310.15110},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
