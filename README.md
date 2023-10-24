@@ -10,7 +10,7 @@ You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0
 
 And you are all set! We provide a custom pipeline for `diffusers` so no extra code is required.
 
-To generate multi-view images from a single input image, you can run the folllowing code (also see [examples/img_to_mv.py](examples/img_to_mv.py)):
+To generate multi-view images from a single input image, you can run the following code (also see [examples/img_to_mv.py](examples/img_to_mv.py)):
 
 ```python
 import torch
