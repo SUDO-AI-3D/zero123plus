@@ -113,7 +113,7 @@ Then run `streamlit run app.py`.
 
 If you found Zero123++ helpful, please cite our report:
 ```bibtex
-@misc{shi2023zero123,
+@misc{shi2023zero123plus,
       title={Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model}, 
       author={Ruoxi Shi and Hansheng Chen and Zhuoyang Zhang and Minghua Liu and Chao Xu and Xinyue Wei and Linghao Chen and Chong Zeng and Hao Su},
       year={2023},
