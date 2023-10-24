@@ -104,7 +104,6 @@ The source code for diffusers custom pipeline is available in the [diffusers-sup
 
 You will need to install extra dependencies:
 ```
-pip install streamlit
 pip install -r requirements.txt
 ```
 
