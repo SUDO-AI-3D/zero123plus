@@ -233,6 +233,11 @@ with results_container:
             seed = int(seed)
             torch.manual_seed(seed)
             img = Image.open(pic)
+            if max(img.size) > 1280:
+                w, h = img.size
+                w = round(1280 / max(img.size) * w)
+                h = round(1280 / max(img.size) * h)
+                img = img.resize((w, h))
             left, right = st.columns(2)
             with left:
                 st.image(img)
