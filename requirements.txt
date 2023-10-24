@@ -9,3 +9,4 @@ streamlit==1.22.0
 altair<5
 huggingface_hub
 git+https://github.com/facebookresearch/segment-anything.git
+gradio

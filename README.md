@@ -109,6 +109,8 @@ pip install -r requirements.txt
 
 Then run `streamlit run app.py`.
 
+For Gradio Demo you can run `gradio web_demo.py`.
+
 ## Citation
 
 If you found Zero123++ helpful, please cite our report:
