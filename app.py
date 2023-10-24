@@ -3,14 +3,12 @@ import sys
 import numpy
 import torch
 import rembg
+import threading
 import urllib.request
 from PIL import Image
 import streamlit as st
 import huggingface_hub
 
-
-if 'HF_TOKEN' in os.environ:
-    huggingface_hub.login(os.environ['HF_TOKEN'])
 
 img_example_counter = 0
 iret_base = 'resources/examples'
@@ -186,10 +184,12 @@ def check_dependencies():
 
 @st.cache_resource
 def load_zero123plus_pipeline():
+    if 'HF_TOKEN' in os.environ:
+        huggingface_hub.login(os.environ['HF_TOKEN'])
     from diffusers import DiffusionPipeline, EulerAncestralDiscreteScheduler
     pipeline = DiffusionPipeline.from_pretrained(
-    "sudo-ai/zero123plus-v1.1", custom_pipeline="sudo-ai/zero123plus-pipeline",
-    torch_dtype=torch.float16
+        "sudo-ai/zero123plus-v1.1", custom_pipeline="sudo-ai/zero123plus-pipeline",
+        torch_dtype=torch.float16
     )
     # Feel free to tune the scheduler
     pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
@@ -197,6 +197,7 @@ def load_zero123plus_pipeline():
     )
     if torch.cuda.is_available():
         pipeline.to('cuda:0')
+    sys.main_lock = threading.Lock()
     return pipeline
 
 
@@ -227,36 +228,38 @@ if sample_got:
     pic = sample_got
 with results_container:
     if sample_got or submit:
-        seed = int(seed)
-        torch.manual_seed(seed)
-        img = Image.open(pic)
-        left, right = st.columns(2)
-        with left:
-            st.image(img)
-            st.caption("Input Image")
-        prog.progress(0.1, "Preparing Inputs")
-        if rem_input_bg:
-            with right:
-                img = segment_img(img)
+        prog.progress(0.03, "Waiting in Queue...")
+        with sys.main_lock:
+            seed = int(seed)
+            torch.manual_seed(seed)
+            img = Image.open(pic)
+            left, right = st.columns(2)
+            with left:
                 st.image(img)
-                st.caption("Input (Background Removed)")
-        img = expand2square(img, (127, 127, 127, 0))
-        pipeline.set_progress_bar_config(disable=True)
-        result = pipeline(
-            img,
-            num_inference_steps=num_inference_steps,
-            guidance_scale=cfg_scale,
-            generator=torch.Generator(pipeline.device).manual_seed(seed),
-            callback=lambda i, t, latents: prog.progress(0.1 + 0.8 * i / num_inference_steps, "Diffusion Step %d" % i)
-        ).images[0]
-        prog.progress(0.9, "Post Processing")
-        left, right = st.columns(2)
-        with left:
-            st.image(result)
-            st.caption("Result")
-        if rem_output_bg:
-            result = segment_6imgs(result)
-            with right:
+                st.caption("Input Image")
+            prog.progress(0.1, "Preparing Inputs")
+            if rem_input_bg:
+                with right:
+                    img = segment_img(img)
+                    st.image(img)
+                    st.caption("Input (Background Removed)")
+            img = expand2square(img, (127, 127, 127, 0))
+            pipeline.set_progress_bar_config(disable=True)
+            result = pipeline(
+                img,
+                num_inference_steps=num_inference_steps,
+                guidance_scale=cfg_scale,
+                generator=torch.Generator(pipeline.device).manual_seed(seed),
+                callback=lambda i, t, latents: prog.progress(0.1 + 0.8 * i / num_inference_steps, "Diffusion Step %d" % i)
+            ).images[0]
+            prog.progress(0.9, "Post Processing")
+            left, right = st.columns(2)
+            with left:
                 st.image(result)
-                st.caption("Result (Background Removed)")
-        prog.progress(1.0, "Idle")
+                st.caption("Result")
+            if rem_output_bg:
+                result = segment_6imgs(result)
+                with right:
+                    st.image(result)
+                    st.caption("Result (Background Removed)")
+            prog.progress(1.0, "Idle")
