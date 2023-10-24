@@ -35,4 +35,4 @@ WORKDIR $HOME/app
 # Copy the current directory contents into the container at $HOME/app setting the owner to the user
 COPY --chown=user . $HOME/app
 
-CMD ["streamlit", "run", "--server.enableXsrfProtection false", "app.py"]
+CMD ["streamlit", "run", "--server.enableXsrfProtection", "false", "app.py"]
