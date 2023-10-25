@@ -100,6 +100,13 @@ The models are available at [https://huggingface.co/sudo-ai](https://huggingface
 
 The source code for diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
 
+## Camera Poses
+
+Output views are a fixed set of camera poses relative to the input view:
+
++ Azimuth: `30, 90, 150, 210, 270, 330`.
++ Elevation: `30, -20, 30, -20, 30, -20`.
+
 ## Running Demo Locally
 
 You will need to install extra dependencies:
