@@ -8,7 +8,7 @@
 
 You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0.20.2`) and `transformers` to start. If you are using `torch` `1.x`, it is recommended to install `xformers` to compute attentions in the model efficiently. The code also runs on older versions of `diffusers`, but you may see a decrease in model performance.
 
-And you are all set! We provide a custom pipeline for `diffusers` so no extra code is required.
+And you are all set! We provide a custom pipeline for `diffusers`, so no extra code is required.
 
 To generate multi-view images from a single input image, you can run the following code (also see [examples/img_to_mv.py](examples/img_to_mv.py)):
 
