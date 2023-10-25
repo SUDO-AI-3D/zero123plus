@@ -37,4 +37,4 @@ COPY --chown=user . $HOME/app
 
 RUN python3 download_checkpoints.py
 
-CMD ["streamlit", "run", "--server.enableXsrfProtection", "false", "app.py"]
+CMD ["python", "gradio_app.py"]
