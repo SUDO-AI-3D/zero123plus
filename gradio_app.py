@@ -22,6 +22,10 @@ _DESCRIPTION = '''
 _GPU_ID = 0
 
 
+if not hasattr(Image, 'Resampling'):
+    Image.Resampling = Image
+
+
 def sam_init():
     sam_checkpoint = os.path.join(os.path.dirname(__file__), "tmp", "sam_vit_h_4b8939.pth")
     model_type = "vit_h"
