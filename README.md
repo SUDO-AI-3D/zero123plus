@@ -2,7 +2,7 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Report](https://arxiv.org/abs/2310.15110) [Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space)
+[Report](https://arxiv.org/abs/2310.15110) [Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) [Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo)
 
 ## Get Started
 
