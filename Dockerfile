@@ -37,4 +37,4 @@ COPY --chown=user . $HOME/app
 
 RUN python3 download_checkpoints.py
 
-CMD ["python", "gradio_app.py"]
+CMD ["python3", "gradio_app.py"]
