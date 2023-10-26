@@ -1,4 +1,4 @@
-# Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model
+# Zero123++: A Single Image to Consistent Multi-view Diffusion Base Model
 
 ![Teaser](resources/teaser-low.jpg)
 
@@ -47,7 +47,7 @@ result.show()
 result.save("output.png")
 ```
 
-The above example requires ~5GB VRAM to operate.
+The above example requires ~5GB VRAM to run.
 The input image needs to be square, and the recommended image resolution is `>=320x320`.
 
 By default, Zero123++ generates opaque images with gray background (the `zero` for Stable Diffusion VAE).
@@ -89,7 +89,7 @@ result.show()
 result.save("output.png")
 ```
 
-This example requires ~5.7GB VRAM to operate.
+This example requires ~5.7GB VRAM to run.
 
 ## Models
 
@@ -116,7 +116,7 @@ pip install -r requirements.txt
 
 Then run `streamlit run app.py`.
 
-For Gradio Demo you can run `python gradio_app.py`.
+For Gradio Demo, you can run `python gradio_app.py`.
 
 ## Citation
 
