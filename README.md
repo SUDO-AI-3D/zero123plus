@@ -2,10 +2,10 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
--[Report](https://arxiv.org/abs/2310.15110) 
--[Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) 
--[Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
--[Google Colab](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
+[\[Report\]](https://arxiv.org/abs/2310.15110) 
+[\[Official Demo\]](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) 
+[\[Demo by @yvrjsharma\]](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
+[\[Google Colab\]](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
 
 ## Get Started
 
@@ -105,10 +105,10 @@ The source code for the diffusers custom pipeline is available in the [diffusers
 
 ## Camera Poses
 
-Output views are a fixed set of camera poses relative to the input view:
+Output views are a fixed set of camera poses:
 
-+ Azimuth: `30, 90, 150, 210, 270, 330`.
-+ Elevation: `30, -20, 30, -20, 30, -20`.
++ Azimuth (relative to input view): `30, 90, 150, 210, 270, 330`.
++ Elevation (absolute): `30, -20, 30, -20, 30, -20`.
 
 ## Running Demo Locally
 
