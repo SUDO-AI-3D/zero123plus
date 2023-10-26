@@ -2,7 +2,7 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Report](https://arxiv.org/abs/2310.15110) [Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) [Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo)
+[Report](https://arxiv.org/abs/2310.15110) [Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) [Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) [Google Colab](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
 
 ## Get Started
 
