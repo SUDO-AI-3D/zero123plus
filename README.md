@@ -2,7 +2,10 @@
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Report](https://arxiv.org/abs/2310.15110) [Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) [Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) [Google Colab](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
+-[Report](https://arxiv.org/abs/2310.15110) 
+-[Official Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) 
+-[Demo by @yvrjsharma](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
+-[Google Colab](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
 
 ## Get Started
 
@@ -50,7 +53,7 @@ result.save("output.png")
 The above example requires ~5GB VRAM to operate.
 The input image needs to be square, and the recommended image resolution is `>=320x320`.
 
-By default, Zero123++ generates opaque images with gray background (the `zero` for Stable Diffusion VAE).
+By default, Zero123++ generates opaque images with a gray background (the `zero` for Stable Diffusion VAE).
 You may run an extra background removal pass like `rembg` to remove the gray background.
 
 ```python
@@ -98,7 +101,7 @@ The models are available at [https://huggingface.co/sudo-ai](https://huggingface
 + `sudo-ai/zero123plus-v1.1`, base Zero123++ model release (v1.1).
 + `sudo-ai/controlnet-zp11-depth-v1` depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
 
-The source code for diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
+The source code for the diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
 
 ## Camera Poses
 
