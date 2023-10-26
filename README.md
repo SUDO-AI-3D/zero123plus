@@ -18,33 +18,42 @@ import requests
 from PIL import Image
 from diffusers import DiffusionPipeline, EulerAncestralDiscreteScheduler
 
-# Load the pipeline
-pipeline = DiffusionPipeline.from_pretrained(
-    "sudo-ai/zero123plus-v1.1", custom_pipeline="sudo-ai/zero123plus-pipeline",
-    torch_dtype=torch.float16
-)
+try:
+    # Load the pipeline
+    pipeline = DiffusionPipeline.from_pretrained(
+        "sudo-ai/zero123plus-v1.1", custom_pipeline="sudo-ai/zero123plus-pipeline",
+        torch_dtype=torch.float16
+    )
 
-# Feel free to tune the scheduler!
-# `timestep_spacing` parameter is not supported in older versions of `diffusers`
-# so there may be performance degradations
-# We recommend using `diffusers==0.20.2`
-pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
-    pipeline.scheduler.config, timestep_spacing='trailing'
-)
-pipeline.to('cuda:0')
+    # Specify the required diffusers version
+    # pip install diffusers==0.20.2
 
-# Download an example image.
-cond = Image.open(requests.get("https://d.skis.ltd/nrp/sample-data/lysol.png", stream=True).raw)
+    # Feel free to tune the scheduler!
+    # `timestep_spacing` parameter is not supported in older versions of `diffusers`
+    # so there may be performance degradations
+    # We recommend using `diffusers==0.20.2`
+    pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
+        pipeline.scheduler.config, timestep_spacing='trailing'
+    )
+    pipeline.to('cuda:0')
 
-# Run the pipeline!
-result = pipeline(cond, num_inference_steps=75).images[0]
-# for general real and synthetic images of general objects
-# usually it is enough to have around 28 inference steps
-# for images with delicate details like faces (real or anime)
-# you may need 75-100 steps for the details to construct
+    # Download an example image.
+    cond = Image.open(requests.get("https://d.skis.ltd/nrp/sample-data/lysol.png", stream=True).raw)
 
-result.show()
-result.save("output.png")
+    # Run the pipeline!
+    result = pipeline(cond, num_inference_steps=75).images[0]
+    # for general real and synthetic images of general objects
+    # usually it is enough to have around 28 inference steps
+    # for images with delicate details like faces (real or anime)
+    # you may need 75-100 steps for the details to construct
+
+    result.show()
+
+    # Save the result with a full file path
+    result.save("output.png")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
 ```
 
 The above example requires ~5GB VRAM to operate.
