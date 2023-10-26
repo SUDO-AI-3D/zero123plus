@@ -53,3 +53,46 @@ result = pipeline(cond, num_inference_steps=75).images[0]
 
 result.show()
 result.save("output.png")
+
+This example requires ~5.7GB VRAM to operate.
+
+## Models
+
+The models are available at [https://huggingface.co/sudo-ai](https://huggingface.co/sudo-ai):
+
++ `sudo-ai/zero123plus-v1.1`, base Zero123++ model release (v1.1).
++ `sudo-ai/controlnet-zp11-depth-v1` depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
+
+The source code for diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
+
+## Camera Poses
+
+Output views are a fixed set of camera poses relative to the input view:
+
++ Azimuth: `30, 90, 150, 210, 270, 330`.
++ Elevation: `30, -20, 30, -20, 30, -20`.
+
+## Running Demo Locally
+
+You will need to install extra dependencies:
+```
+pip install -r requirements.txt
+```
+
+Then run `streamlit run app.py`.
+
+For Gradio Demo you can run `python gradio_app.py`.
+
+## Citation
+
+If you found Zero123++ helpful, please cite our report:
+```bibtex
+@misc{shi2023zero123plus,
+      title={Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model}, 
+      author={Ruoxi Shi and Hansheng Chen and Zhuoyang Zhang and Minghua Liu and Chao Xu and Xinyue Wei and Linghao Chen and Chong Zeng and Hao Su},
+      year={2023},
+      eprint={2310.15110},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
