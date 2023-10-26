@@ -16,35 +16,44 @@ To generate multi-view images from a single input image, you can run the followi
 import torch
 import requests
 from PIL import Image
-from diffusers import DiffusionPipeline, EulerAncestralDiscreteScheduler
+from diffusers import DiffusionPipeline, EulerAncestralDiscreteScheduler, ControlNetModel
+
+# Define constants or variables with meaningful names
+NUM_INFERENCE_STEPS = 36
+CONDITIONING_SCALE = 0.75
+MODEL_URL = "https://d.skis.ltd/nrp/sample-data/0_cond.png"
+DEPTH_URL = "https://d.skis.ltd/nrp/sample-data/0_depth.png"
 
 # Load the pipeline
 pipeline = DiffusionPipeline.from_pretrained(
-    "sudo-ai/zero123plus-v1.1", custom_pipeline="sudo-ai/zero123plus-pipeline",
+    "sudo-ai/zero123plus-v1.1",
+    custom_pipeline="sudo-ai/zero123plus-pipeline",
     torch_dtype=torch.float16
 )
+pipeline.add_controlnet(ControlNetModel.from_pretrained(
+    "sudo-ai/controlnet-zp11-depth-v1",
+    torch_dtype=torch.float16
+), conditioning_scale=CONDITIONING_SCALE)
 
-# Feel free to tune the scheduler!
-# `timestep_spacing` parameter is not supported in older versions of `diffusers`
-# so there may be performance degradations
-# We recommend using `diffusers==0.20.2`
+# Adjust the scheduler
 pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
     pipeline.scheduler.config, timestep_spacing='trailing'
 )
+
+# Transfer to GPU
 pipeline.to('cuda:0')
 
-# Download an example image.
-cond = Image.open(requests.get("https://d.skis.ltd/nrp/sample-data/lysol.png", stream=True).raw)
+# Fetch images
+conditioning_image = Image.open(requests.get(MODEL_URL, stream=True).raw)
+depth_image = Image.open(requests.get(DEPTH_URL, stream=True).raw)
 
-# Run the pipeline!
-result = pipeline(cond, num_inference_steps=75).images[0]
-# for general real and synthetic images of general objects
-# usually it is enough to have around 28 inference steps
-# for images with delicate details like faces (real or anime)
-# you may need 75-100 steps for the details to construct
+# Run the pipeline
+result = pipeline(conditioning_image, depth_image=depth_image, num_inference_steps=NUM_INFERENCE_STEPS).images[0]
 
+# Display and save the result
 result.show()
 result.save("output.png")
+
 ```
 
 The above example requires ~5GB VRAM to operate.
