@@ -7,6 +7,15 @@
 ## Get Started
 
 You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0.20.2`), and `transformers` to start. If you are using `torch` `1.x`, it is recommended to install `xformers` to compute attentions in the model efficiently. The code also runs on older versions of `diffusers`, but you may see a decrease in model performance.
+It's a good practice to create a virtual environment to isolate your project's dependencies. You can use venv or conda for this purpose. Here's how to create a virtual environment with venv:
+# Create a new virtual environment
+```python
+python3 -m venv zero123-env
+```
+
+# Activate the virtual environment
+source zero123-env/bin/activate  # On Windows, use: zero123-env\Scripts\activate
+
 
 And you are all set! We provide a custom pipeline for `diffusers`, so no extra code is required.
 
