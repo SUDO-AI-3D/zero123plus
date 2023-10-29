@@ -128,7 +128,7 @@ For Gradio Demo, you can run `python gradio_app.py`.
 
 ## License
 
-This project is licensed under the Apache-2.0 license [LICENSE](./LICENSE) 
+This project is licensed under the [Apache-2.0 license](./LICENSE) 
 
 **Copyright (c) 2004 SUDO-AI-3D**
 
