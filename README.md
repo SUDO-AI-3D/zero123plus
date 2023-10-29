@@ -132,7 +132,6 @@ This project is licensed under the [Apache-2.0 license](./LICENSE)
 
 **Copyright (c) 2004 SUDO-AI-3D**
 
-
 ## Citation
 
 If you found Zero123++ helpful, please cite our report:
