@@ -121,6 +121,11 @@ Then run `streamlit run app.py`.
 
 For Gradio Demo, you can run `python gradio_app.py`.
 
+## Related Work
+[\[One-2-3-45\]](https://github.com/One-2-3-45/One-2-3-45)
+
+[\[Zero123\]](https://github.com/cvlab-columbia/zero123)
+
 ## Citation
 
 If you found Zero123++ helpful, please cite our report:
