@@ -126,6 +126,13 @@ For Gradio Demo, you can run `python gradio_app.py`.
 
 [\[Zero123\]](https://github.com/cvlab-columbia/zero123)
 
+## License
+This project is licensed under the Apache License. For more information on the Apache License and its terms, please refer to the [LICENSE](./LICENSE) file.
+
+**Copyright (c) SUDO-AI-3D**
+
+If you have any questions or need further information about the license, please contact the project maintainers.
+
 ## Citation
 
 If you found Zero123++ helpful, please cite our report:
