@@ -29,7 +29,7 @@ pipeline = DiffusionPipeline.from_pretrained(
 
 # Feel free to tune the scheduler!
 # `timestep_spacing` parameter is not supported in older versions of `diffusers`
-# so there may be performance degradations
+# So there may be performance degradations
 # We recommend using `diffusers==0.20.2`
 pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
     pipeline.scheduler.config, timestep_spacing='trailing'
