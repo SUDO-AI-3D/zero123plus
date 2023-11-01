@@ -361,12 +361,20 @@ class Zero123PlusPipeline(diffusers.StableDiffusionPipeline):
         global_embeds = encoded.image_embeds
         global_embeds = global_embeds.unsqueeze(-2)
         
-        encoder_hidden_states = self._encode_prompt(
-            prompt,
-            self.device,
-            num_images_per_prompt,
-            False
-        )
+        if hasattr(self, "encode_prompt"):
+            encoder_hidden_states = self.encode_prompt(
+                prompt,
+                self.device,
+                num_images_per_prompt,
+                False
+            )[0]
+        else:
+            encoder_hidden_states = self._encode_prompt(
+                prompt,
+                self.device,
+                num_images_per_prompt,
+                False
+            )
         ramp = global_embeds.new_tensor(self.config.ramping_coefficients).unsqueeze(-1)
         encoder_hidden_states = encoder_hidden_states + global_embeds * ramp
         cak = dict(cond_lat=cond_lat)
