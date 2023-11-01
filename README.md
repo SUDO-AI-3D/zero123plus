@@ -1,12 +1,15 @@
-# Zero123++: a Single Image to Consistent Multi-view Diffusion Base Model
+# Zero123++: A Single Image to Consistent Multi-view Diffusion Base Model
 
 ![Teaser](resources/teaser-low.jpg)
 
-[Report](https://arxiv.org/abs/2310.15110) [Demo](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space)
+[\[Report\]](https://arxiv.org/abs/2310.15110) 
+[\[Official Demo\]](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) 
+[\[Demo by @yvrjsharma\]](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
+[\[Google Colab\]](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
 
 ## Get Started
 
-You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0.20.2`), and `transformers` to start. If you are using `torch` `1.x`, it is recommended to install `xformers` to compute attentions in the model efficiently. The code also runs on older versions of `diffusers`, but you may see a decrease in model performance.
+You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0.20.2`), and `transformers` to start. If you are using `torch` `1.x`, it is recommended to install `xformers` to compute attention in the model efficiently. The code also runs on older versions of `diffusers`, but you may see a decrease in model performance.
 
 And you are all set! We provide a custom pipeline for `diffusers`, so no extra code is required.
 
@@ -47,10 +50,10 @@ result.show()
 result.save("output.png")
 ```
 
-The above example requires ~5GB VRAM to operate.
+The above example requires ~5GB VRAM to run.
 The input image needs to be square, and the recommended image resolution is `>=320x320`.
 
-By default, Zero123++ generates opaque images with gray background (the `zero` for Stable Diffusion VAE).
+By default, Zero123++ generates opaque images with a gray background (the `zero` for Stable Diffusion VAE).
 You may run an extra background removal pass like `rembg` to remove the gray background.
 
 ```python
@@ -89,7 +92,7 @@ result.show()
 result.save("output.png")
 ```
 
-This example requires ~5.7GB VRAM to operate.
+This example requires ~5.7GB VRAM to run.
 
 ## Models
 
@@ -98,14 +101,14 @@ The models are available at [https://huggingface.co/sudo-ai](https://huggingface
 + `sudo-ai/zero123plus-v1.1`, base Zero123++ model release (v1.1).
 + `sudo-ai/controlnet-zp11-depth-v1` depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
 
-The source code for diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
+The source code for the diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
 
 ## Camera Poses
 
-Output views are a fixed set of camera poses relative to the input view:
+Output views are a fixed set of camera poses:
 
-+ Azimuth: `30, 90, 150, 210, 270, 330`.
-+ Elevation: `30, -20, 30, -20, 30, -20`.
++ Azimuth (relative to input view): `30, 90, 150, 210, 270, 330`.
++ Elevation (absolute): `30, -20, 30, -20, 30, -20`.
 
 ## Running Demo Locally
 
@@ -116,7 +119,12 @@ pip install -r requirements.txt
 
 Then run `streamlit run app.py`.
 
-For Gradio Demo you can run `python gradio_app.py`.
+For Gradio Demo, you can run `python gradio_app.py`.
+
+## Related Work
+[\[One-2-3-45\]](https://github.com/One-2-3-45/One-2-3-45)
+
+[\[Zero123\]](https://github.com/cvlab-columbia/zero123)
 
 ## Citation
 
