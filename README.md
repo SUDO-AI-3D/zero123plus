@@ -6,6 +6,7 @@
 [\[Official Demo\]](https://huggingface.co/spaces/sudo-ai/zero123plus-demo-space) 
 [\[Demo by @yvrjsharma\]](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
 [\[Google Colab\]](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
+[\[Replicate demo\]](https://replicate.com/jd7h/zero123plusplus)
 
 ## Get Started
 
