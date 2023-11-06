@@ -54,7 +54,7 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        image: Path = Input(description="Input image"),
+        image: Path = Input(description="Input image. Aspect ratio should be 1:1. Recommended resolution is >= 320x320 pixels."),
         remove_background: bool = Input(description="Remove the background of the input image", default=False),
         return_intermediate_images: bool = Input(description="Return the intermediate images together with the output images", default=False),
     ) -> List[Path]:
