@@ -365,18 +365,25 @@ class Zero123PlusPipeline(diffusers.StableDiffusionPipeline):
             encoder_hidden_states = self.encode_prompt(
                 prompt,
                 self.device,
-                num_images_per_prompt,
+                1,
                 False
             )[0]
         else:
             encoder_hidden_states = self._encode_prompt(
                 prompt,
                 self.device,
-                num_images_per_prompt,
+                1,
                 False
             )
         ramp = global_embeds.new_tensor(self.config.ramping_coefficients).unsqueeze(-1)
         encoder_hidden_states = encoder_hidden_states + global_embeds * ramp
+
+        if num_images_per_prompt > 1:
+            bs_embed, *lat_shape = cond_lat.shape
+            assert len(lat_shape) == 3
+            cond_lat = cond_lat.repeat(1, num_images_per_prompt, 1, 1)
+            cond_lat = cond_lat.view(bs_embed * num_images_per_prompt, *lat_shape)
+
         cak = dict(cond_lat=cond_lat)
         if hasattr(self.unet, "controlnet"):
             cak['control_depth'] = depth_image
