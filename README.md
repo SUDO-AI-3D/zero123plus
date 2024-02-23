@@ -7,6 +7,32 @@
 [\[Demo by @yvrjsharma\]](https://huggingface.co/spaces/ysharma/Zero123PlusDemo) 
 [\[Google Colab\]](https://colab.research.google.com/drive/1_5ECnTOosRuAsm2tUp0zvBG0DppL-F3V?usp=sharing)
 
+## UPDATES v1.2
+
+We are thrilled to release Zero123++ v1.2! Main changes:
+
++ Camera intrinsics are handled more delibrately. The v1.2 model is more robust to a wider range of input field of views, croppings and unifies the output field of view to **30°** to better reflect that of realistic close-up views.
++ The fixed set of elevations are changed from 30° and -20° to **20°** and **-10°**.
++ In contrast with novel-view synthesis, the model focuses more for 3D generation. The model always outputs a set of views assuming a normalized object size instead of changing w.r.t. the input.
+
+Additionally, we have a **normal generator** ControlNet that can generate view-space normal images. The output can also be used to obtain a more accurate mask than the SAM-based approach. Validation metrics on our validation set from Objaverse: alpha (before matting) IoU 98.81%, mean normal angular error 10.75°, normal PSNR 26.93 dB.
+
+![Nomal](resources/burger-normal.jpg)
+
+### Usage
+
+Use of the v1.2 base model is unchanged. Please see the sections below for usage.
+
+**Use of the normal generator:** See [examples/normal_gen.py](examples/normal_gen.py).
+
+For **alpha mask generation** from the normal images, please see [examples/matting_postprocess.py](examples/matting_postprocess.py) and [examples/normal_gen.py](examples/normal_gen.py).
+
+### License
+
+The code is released under Apache 2.0 and the model weights are released under CC-BY-NC 4.0.
+
+This means that you cannot use the model (or its derivatives) in a commercial product pipeline, but you can still use the outputs from the model freely. And, you are accountable for the output you generate and its subsequent uses.
+
 ## Get Started
 
 You will need `torch` (recommended `2.0` or higher), `diffusers` (recommended `0.20.2`), and `transformers` to start. If you are using `torch` `1.x`, it is recommended to install `xformers` to compute attention in the model efficiently. The code also runs on older versions of `diffusers`, but you may see a decrease in model performance.
@@ -99,16 +125,20 @@ This example requires ~5.7GB VRAM to run.
 The models are available at [https://huggingface.co/sudo-ai](https://huggingface.co/sudo-ai):
 
 + `sudo-ai/zero123plus-v1.1`, base Zero123++ model release (v1.1).
-+ `sudo-ai/controlnet-zp11-depth-v1` depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
++ `sudo-ai/controlnet-zp11-depth-v1`, depth ControlNet checkpoint release (v1) for Zero123++ (v1.1).
++ `sudo-ai/zero123plus-v1.2`, base Zero123++ model release (v1.2).
++ `sudo-ai/controlnet-zp12-normal-gen-v1`, normal generation ControlNet checkpoint release (v1) for Zero123++ (v1.2).
 
 The source code for the diffusers custom pipeline is available in the [diffusers-support](diffusers-support) directory.
 
-## Camera Poses
+## Camera Parameters
 
 Output views are a fixed set of camera poses:
 
 + Azimuth (relative to input view): `30, 90, 150, 210, 270, 330`.
-+ Elevation (absolute): `30, -20, 30, -20, 30, -20`.
++ v1.1 Elevation (absolute): `30, -20, 30, -20, 30, -20`.
++ v1.2 Elevation (absolute): `20, -10, 20, -10, 20, -10`.
++ v1.2 Field of View (absolute): `30°`.
 
 ## Running Demo Locally
 
