@@ -1,0 +1,34 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+
+  # a list of ubuntu apt packages to install
+  # system_packages:
+  #   - "libgl1-mesa-glx"
+  #   - "libglib2.0-0"
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.11"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "accelerate==0.24.1"
+    - "diffusers==0.20.2"
+    - "huggingface-hub==0.18.0"
+    - "numpy==1.24.4"
+    - "rembg==2.0.51"
+    - "git+https://github.com/facebookresearch/segment-anything.git"
+    - "torch==2.0.1"
+    - "torchvision==0.15.2"
+    - "transformers==4.29.2"
+
+  # commands run after the environment is setup
+  run:
+      - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.0.1/pget" 
+      - chmod +x /usr/local/bin/pget
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
