@@ -18,7 +18,7 @@ We are thrilled to release Zero123++ v1.2! Main changes:
 
 Additionally, we have a **normal generator** ControlNet that can generate view-space normal images. The output can also be used to obtain a more accurate mask than the SAM-based approach. Validation metrics on our validation set from Objaverse: alpha (before matting) IoU 98.81%, mean normal angular error 10.75°, normal PSNR 26.93 dB.
 
-![Nomal](resources/burger-normal.jpg)
+<img src="resources/burger-normal.jpg" alt="Normal" width="480" />
 
 ### Usage
 
